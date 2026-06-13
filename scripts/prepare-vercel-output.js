@@ -217,7 +217,21 @@ const html = `<!DOCTYPE html>
         .cta-actions { display: flex; flex-wrap: wrap; gap: 14px; }
         .cta-actions a { background: white; color: var(--blue); border-radius: 18px; padding: 16px 22px; font-weight: 900; white-space: nowrap; }
         .cta-actions a:last-child { background: #22c55e; color: white; }
-        footer { padding: 40px 0; color: #94a3b8; text-align: center; font-weight: 700; }
+        .site-footer { background: #020817; color: #94a3b8; padding: 76px 0 34px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 64px; align-items: start; }
+        .footer-brand { display: flex; align-items: center; gap: 12px; color: white; font-family: Poppins, sans-serif; }
+        .footer-brand .brand-mark { width: 54px; height: 54px; border-radius: 20px; }
+        .footer-brand strong { font-size: 34px; font-weight: 900; }
+        .site-footer p { line-height: 1.8; font-weight: 600; }
+        .socials { display: flex; gap: 12px; margin-top: 24px; }
+        .socials a { width: 42px; height: 42px; border-radius: 14px; display: grid; place-items: center; background: rgba(255,255,255,.06); color: white; font-weight: 900; }
+        .footer-title { color: white; font-size: 13px; font-weight: 900; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 24px; }
+        .footer-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; font-weight: 800; }
+        .footer-list a:hover { color: #60a5fa; }
+        .footer-contact { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; font-weight: 800; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); margin-top: 52px; padding-top: 28px; text-align: center; font-size: 12px; font-weight: 900; letter-spacing: .18em; text-transform: uppercase; }
+        .footer-credit { margin-top: 10px; text-align: center; font-size: 13px; color: #64748b; }
+        .footer-credit strong { color: white; }
         @media (max-width: 980px) {
             .nav-links { display: none; }
             .tour-grid { grid-template-columns: repeat(2, 1fr); }
@@ -225,6 +239,7 @@ const html = `<!DOCTYPE html>
             .destination.large, .destination.tall { grid-column: span 1; grid-row: span 1; }
             .payment-grid { grid-template-columns: repeat(3, 1fr); }
             .cta { align-items: flex-start; flex-direction: column; padding: 34px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 38px; }
         }
         @media (max-width: 640px) {
             .brand small { display: none; }
@@ -323,8 +338,45 @@ ${paymentCards}
         </section>
     </main>
 
-    <footer>
-        <div class="container">© 2026 Akash Tours and Travels. All rights reserved.</div>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="/" class="footer-brand">
+                        <span class="brand-mark">A</span>
+                        <strong>Akash<span style="color:#2563eb">Tours</span></strong>
+                    </a>
+                    <p>আপনার বিশ্বস্ত ভ্রমণ সঙ্গী। আপনাদের জন্য সব সময় সেরা ট্যুর প্যাকেজ নিশ্চিত করা হয়। মাধবপুর থেকে পথচলা শুরু।</p>
+                    <div class="socials">
+                        <a href="https://facebook.com/akashtours" aria-label="Facebook">f</a>
+                        <a href="#" aria-label="Instagram">◎</a>
+                        <a href="#" aria-label="YouTube">▶</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="footer-title">প্রয়োজনীয় লিংক</h3>
+                    <ul class="footer-list">
+                        <li><a href="#packages">ট্যুর প্যাকেজ</a></li>
+                        <li><a href="#destinations">গন্তব্য</a></li>
+                        <li><a href="#payments">পেমেন্ট মাধ্যম</a></li>
+                        <li><a href="#contact">যোগাযোগ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="footer-title">যোগাযোগ</h3>
+                    <ul class="footer-contact">
+                        <li>আমীর কমপ্লেক্স, মাধবপুর বাজার, হবিগঞ্জ</li>
+                        <li>01711662685</li>
+                        <li>akash@akashmadhabpur.org</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">© 2026 Akash Tours and Travels. All rights reserved.</div>
+            <div class="footer-credit">Design and Developed By <strong>Digital Webars</strong></div>
+        </div>
     </footer>
 </body>
 </html>`;
