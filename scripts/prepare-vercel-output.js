@@ -13,45 +13,45 @@ if (existsSync(publicDir)) {
 
 const packages = [
     {
-        title: 'Sylhet Sada Pathor Day Tour',
-        destination: 'Bholaganj, Sylhet',
-        price: 'Tk 1,350',
-        duration: '1 Day',
+        title: 'সিলেট সাদা পাথর ডে ট্যুর',
+        destination: 'ভোলাগঞ্জ, সিলেট',
+        price: '৳১,৩৫০',
+        duration: '১ দিন',
         image: 'https://images.unsplash.com/photo-1581600140682-d4e68c8cde32?q=80&w=1200',
-        description: 'Comfortable day tour from Madhabpur with boat ride, breakfast, lunch, and guide support.',
+        description: 'মাধবপুর থেকে আরামদায়ক ডে ট্যুর। নৌকা ভ্রমণ, সকালের নাস্তা, দুপুরের খাবার এবং গাইড সাপোর্টসহ।',
     },
     {
-        title: 'Kuakata Sea Beach Tour',
-        destination: 'Kuakata, Patuakhali',
-        price: 'Tk 4,500',
-        duration: '3 Nights 2 Days',
+        title: 'কুয়াকাটা সমুদ্র সৈকত ট্যুর',
+        destination: 'কুয়াকাটা, পটুয়াখালী',
+        price: '৳৪,৫০০',
+        duration: '৩ রাত ২ দিন',
         image: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200',
-        description: 'Enjoy sunrise, sunset, beach activities, hotel stay, meals, and group sightseeing.',
+        description: 'সূর্যোদয়, সূর্যাস্ত, সমুদ্র সৈকত, হোটেল থাকা, খাবার এবং গ্রুপ সাইটসিয়িংসহ সুন্দর আয়োজন।',
     },
     {
-        title: 'Rajshahi Mango Tour',
-        destination: 'Rajshahi, Chapainawabganj',
-        price: 'Tk 3,500',
-        duration: '1 Night 2 Days',
+        title: 'রাজশাহী ও চাঁপাইনবাবগঞ্জ আম ট্যুর',
+        destination: 'রাজশাহী, চাঁপাইনবাবগঞ্জ',
+        price: '৳৩,৫০০',
+        duration: '১ রাত ২ দিন',
         image: 'https://images.unsplash.com/photo-1622116208929-577779d732ff?q=80&w=1200',
-        description: 'Visit mango orchards, Kansat mango market, Padma river bank, and historic spots.',
+        description: 'আম বাগান, কানসাট আম বাজার, পদ্মা নদীর পাড় এবং ঐতিহাসিক দর্শনীয় স্থান ঘুরে দেখুন।',
     },
     {
-        title: 'Magic Paradise Park Family Day Tour',
-        destination: 'Kotbari, Cumilla',
-        price: 'Tk 1,650',
-        duration: '1 Day',
+        title: 'ম্যাজিক প্যারাডাইস পার্ক ফ্যামিলি ট্যুর',
+        destination: 'কোটবাড়ি, কুমিল্লা',
+        price: '৳১,৬৫০',
+        duration: '১ দিন',
         image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200',
-        description: 'Family-friendly day tour with transport, breakfast, lunch, and group management.',
+        description: 'পরিবার নিয়ে আনন্দ করার জন্য পরিবহন, নাস্তা, দুপুরের খাবার এবং গ্রুপ ম্যানেজমেন্টসহ ট্যুর।',
     },
 ];
 
 const destinations = [
-    ['Kashmir', '10+ packages available', 'https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=1000', 'large'],
-    ['Sylhet', 'Sada Pathor and Jaflong', 'https://images.unsplash.com/photo-1582650625119-3a31f8fa2699?q=80&w=1000', 'small'],
-    ['Cox Bazar', 'Sea beach tour', 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1000', 'tall'],
-    ['Rajshahi', 'Mango capital', 'https://images.unsplash.com/photo-1622116208929-577779d732ff?q=80&w=1000', 'small'],
-    ['Kedarnath', 'Holy pilgrimage', 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1000', 'large'],
+    ['কাশ্মীর', '১০+ প্যাকেজ Available', 'https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=1000', 'large'],
+    ['সিলেট', 'সাদা পাথর ও জাফলং', 'https://images.unsplash.com/photo-1582650625119-3a31f8fa2699?q=80&w=1000', 'small'],
+    ['কক্সবাজার', 'সমুদ্র সৈকত ভ্রমণ', 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1000', 'tall'],
+    ['রাজশাহী', 'আমের রাজধানী', 'https://images.unsplash.com/photo-1622116208929-577779d732ff?q=80&w=1000', 'small'],
+    ['কেদারনাথ', 'পবিত্র তীর্থযাত্রা', 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1000', 'large'],
 ];
 
 const payments = [
@@ -79,7 +79,7 @@ const packageCards = packages.map((tour) => `
                 <p>${tour.description}</p>
                 <div class="card-footer">
                     <strong>${tour.price}</strong>
-                    <a href="tel:01711662685">Call Now</a>
+                    <a href="tel:01711662685">কল করুন</a>
                 </div>
             </div>
         </article>`).join('');
@@ -103,7 +103,7 @@ const html = `<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akash Tours</title>
+    <title>আকাশ ট্যুরস</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700;900&family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -246,24 +246,24 @@ const html = `<!DOCTYPE html>
                 </span>
             </a>
             <div class="nav-links">
-                <a href="#packages">Packages</a>
-                <a href="#destinations">Destinations</a>
-                <a href="#payments">Payments</a>
-                <a href="#contact" class="button">Call Now</a>
+                <a href="#packages">ট্যুর প্যাকেজ</a>
+                <a href="#destinations">গন্তব্য</a>
+                <a href="#payments">পেমেন্ট</a>
+                <a href="#contact" class="button">কল করুন</a>
             </div>
         </nav>
     </header>
 
     <main>
         <section class="hero">
-            <img class="hero-bg" src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=2000" alt="Akash Tours travel view">
+            <img class="hero-bg" src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=2000" alt="আকাশ ট্যুরস">
             <div class="container hero-content">
                 <span class="badge">Bangladesh's Top Rated Agency</span>
-                <h1>Safe and joyful tours across Bangladesh</h1>
-                <p>Akash Tours arranges premium group tours, family trips, transport, food, guide support, and easy booking assistance from Madhabpur.</p>
+                <h1>ভ্রমণ হোক নিরাপদ ও আনন্দময়</h1>
+                <p>মাধবপুর থেকে নিয়মিত আকর্ষণীয় সব ট্যুর প্যাকেজ আয়োজন করা হয়। আপনার আস্থার প্রতীক - আকাশ ট্যুরস এন্ড ট্রাভেলস।</p>
                 <div class="actions">
-                    <a class="primary" href="#packages">View Packages</a>
-                    <a class="secondary" href="https://wa.me/8801711662685">WhatsApp</a>
+                    <a class="primary" href="#packages">ট্যুর প্যাকেজ দেখুন</a>
+                    <a class="secondary" href="https://wa.me/8801711662685">যোগাযোগ করুন</a>
                 </div>
             </div>
         </section>
@@ -272,8 +272,8 @@ const html = `<!DOCTYPE html>
             <div class="container">
                 <div class="section-head">
                     <span class="eyebrow">Popular Tour Packages</span>
-                    <h2>Ready packages for your next journey</h2>
-                    <p>Choose a destination and contact Akash Tours to confirm seats, payment details, and travel schedule.</p>
+                    <h2>জনপ্রিয় ট্যুর প্যাকেজ</h2>
+                    <p>পছন্দের গন্তব্যটি বেছে নিন এবং বুকিং করুন খুব সহজেই।</p>
                 </div>
                 <div class="tour-grid">
 ${packageCards}
@@ -285,8 +285,8 @@ ${packageCards}
             <div class="container">
                 <div class="section-head">
                     <span class="eyebrow">Top Travel Destinations</span>
-                    <h2>Beautiful places for group and family tours</h2>
-                    <p>Explore scenic, religious, beach, and cultural destinations with organized travel support.</p>
+                    <h2>টপ ট্রাভেল ডেস্টিনেশন</h2>
+                    <p>দেশ-বিদেশের সবচেয়ে সুন্দর জায়গাগুলোতে ঘুরে আসুন।</p>
                 </div>
                 <div class="dest-grid">
 ${destinationCards}
@@ -299,7 +299,7 @@ ${destinationCards}
                 <div class="section-head">
                     <span class="eyebrow">Payment Partners</span>
                     <h2>পেমেন্ট মাধ্যমসমূহ</h2>
-                    <p>Mobile banking, cards, and bank payment options are supported for booking confirmation.</p>
+                    <p>মোবাইল ব্যাংকিং, ব্যাংক ও কার্ড পেমেন্ট গ্রহণযোগ্য।</p>
                 </div>
                 <div class="payment-grid">
 ${paymentCards}
@@ -311,8 +311,8 @@ ${paymentCards}
             <div class="container">
                 <div class="cta">
                     <div>
-                        <h2>Book your next tour today</h2>
-                        <p>Call or message Akash Tours for seat availability, package details, and payment instructions.</p>
+                        <h2>আপনার পরবর্তী ভ্রমণ শুরু হোক আজই</h2>
+                        <p>সিট, প্যাকেজ এবং পেমেন্ট সম্পর্কে জানতে এখনই আকাশ ট্যুরসের সাথে যোগাযোগ করুন।</p>
                     </div>
                     <div class="cta-actions">
                         <a href="tel:01711662685">01711662685</a>
