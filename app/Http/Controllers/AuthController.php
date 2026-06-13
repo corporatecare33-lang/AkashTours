@@ -15,6 +15,15 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
+    public function showAdminLogin()
+    {
+        if (Auth::check() && Auth::user()->is_admin) {
+            return redirect()->route('dashboard');
+        }
+
+        return view('auth.admin-login');
+    }
+
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -28,6 +37,30 @@ class AuthController extends Controller
         }
 
         return back()->withErrors(['email' => 'The provided credentials do not match our records.']);
+    }
+
+    public function adminLogin(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            if (Auth::user()->is_admin) {
+                return redirect()->route('dashboard');
+            }
+
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+        }
+
+        return back()
+            ->withInput($request->only('email'))
+            ->withErrors(['email' => 'Only admin users can login here.']);
     }
 
     public function showRegister()
