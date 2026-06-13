@@ -65,8 +65,6 @@ class ContentSeeder extends Seeder
             ['BRAC Bank', '/images/payments/brac-bank.svg'],
             ['City Bank', '/images/payments/city-bank.svg'],
             ['Sonali Bank', '/images/payments/sonali-bank.svg'],
-            ['ShurjoPay', '/images/payments/shurjopay.svg'],
-            ['DBBL Nexus', '/images/payments/dbbl-nexus.svg'],
         ] as $index => [$name, $logo]) {
             PaymentMethod::create([
                 'name' => $name,
