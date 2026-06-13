@@ -55,18 +55,18 @@ class ContentSeeder extends Seeder
 
         PaymentMethod::query()->delete();
         foreach ([
-            ['AMEX', 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo_%282018%29.svg/1200px-American_Express_logo_%282018%29.svg.png'],
-            ['Mastercard', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/1280px-Mastercard-logo.svg.png'],
-            ['Visa', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png'],
-            ['bKash', 'https://upload.wikimedia.org/wikipedia/en/thumb/8/8c/BKash_logo.svg/1200px-BKash_logo.svg.png'],
-            ['Nagad', 'https://download.logo.wine/logo/Nagad/Nagad-Logo.wine.png'],
-            ['Rocket', 'https://raw.githubusercontent.com/manas-p-mishra/payment-icons/master/icons/rocket.png'],
-            ['Upay', 'https://seeklogo.com/images/U/upai-logo-F2134044A1-seeklogo.com.png'],
-            ['BRAC Bank', 'https://www.bracbank.com/assets/images/logo.png'],
-            ['City Bank', 'https://www.thecitybank.com/img/citybank-logo.png'],
-            ['Sonali Bank', 'https://www.sonalibank.com.bd/images/logo.png'],
-            ['ShurjoPay', 'https://shurjopay.com.bd/dev/images/shurjopay-logo.png'],
-            ['DBBL Nexus', 'https://www.dutchbanglabank.com/img/dbbl-logo.png'],
+            ['AMEX', '/images/payments/amex.svg'],
+            ['Mastercard', '/images/payments/mastercard.svg'],
+            ['Visa', '/images/payments/visa.svg'],
+            ['bKash', '/images/payments/bkash.svg'],
+            ['Nagad', '/images/payments/nagad.svg'],
+            ['Rocket', '/images/payments/rocket.svg'],
+            ['Upay', '/images/payments/upay.svg'],
+            ['BRAC Bank', '/images/payments/brac-bank.svg'],
+            ['City Bank', '/images/payments/city-bank.svg'],
+            ['Sonali Bank', '/images/payments/sonali-bank.svg'],
+            ['ShurjoPay', '/images/payments/shurjopay.svg'],
+            ['DBBL Nexus', '/images/payments/dbbl-nexus.svg'],
         ] as $index => [$name, $logo]) {
             PaymentMethod::create([
                 'name' => $name,
