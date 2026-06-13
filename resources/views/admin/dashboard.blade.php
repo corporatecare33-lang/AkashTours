@@ -18,6 +18,9 @@
         .admin-card { background: #fff; border: 1px solid #dedbd5; border-radius: 14px; box-shadow: 0 1px 0 rgba(15, 23, 42, .02); }
         .admin-input { width: 100%; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0; padding: 13px 15px; font-weight: 700; outline: none; }
         .admin-input:focus { border-color: #f05a28; box-shadow: 0 0 0 3px rgba(240, 90, 40, .12); }
+        .field-label { display: block; color: #94a3b8; font-size: 11px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 7px; }
+        .soft-panel { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 18px; }
+        .table-head { color: #64748b; font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
     </style>
 </head>
 <body class="text-slate-950">
@@ -144,10 +147,30 @@
                             <x-admin.input name="primary_button" label="Primary Button" :value="$hero['primary_button'] ?? 'ট্যুর প্যাকেজ দেখুন'" required="true" />
                             <x-admin.input name="secondary_button" label="Secondary Button" :value="$hero['secondary_button'] ?? 'যোগাযোগ করুন'" required="true" />
                         </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            @for($i = 0; $i < 4; $i++)
-                                <x-admin.input name="images[]" label="Banner Image {{ $i + 1 }}" :value="$hero['images'][$i] ?? ''" />
-                            @endfor
+                        <div class="space-y-3">
+                            <div class="flex flex-wrap items-center justify-between gap-3">
+                                <div>
+                                    <span class="field-label">Banner Images</span>
+                                    <p class="text-sm text-slate-500 font-bold">Image URL add/remove kore save korlei frontend hero slider update hobe.</p>
+                                </div>
+                                <button type="button" id="addHeroImage" class="px-4 py-2 rounded-xl bg-orange-50 text-[#f05a28] font-black">+ Add Image</button>
+                            </div>
+                            <div id="heroImageRows" class="space-y-3">
+                                @php($heroImages = array_values(array_filter($hero['images'] ?? [])))
+                                @forelse($heroImages as $image)
+                                    <div class="soft-panel p-3 grid grid-cols-1 lg:grid-cols-[150px_1fr_auto] gap-3 items-center hero-image-row">
+                                        <img src="{{ $image }}" alt="Banner preview" class="w-full h-24 object-cover rounded-xl bg-slate-100">
+                                        <input name="images[]" value="{{ $image }}" required class="admin-input" placeholder="https://example.com/banner.jpg">
+                                        <button type="button" class="remove-hero-image px-4 py-3 rounded-xl bg-red-50 text-red-600 font-black">Delete</button>
+                                    </div>
+                                @empty
+                                    <div class="soft-panel p-3 grid grid-cols-1 lg:grid-cols-[150px_1fr_auto] gap-3 items-center hero-image-row">
+                                        <div class="w-full h-24 rounded-xl bg-slate-100 flex items-center justify-center text-slate-400 font-black">Preview</div>
+                                        <input name="images[]" value="" required class="admin-input" placeholder="https://example.com/banner.jpg">
+                                        <button type="button" class="remove-hero-image px-4 py-3 rounded-xl bg-red-50 text-red-600 font-black">Delete</button>
+                                    </div>
+                                @endforelse
+                            </div>
                         </div>
                         <button class="bg-[#f05a28] text-white px-7 py-3 rounded-xl font-black">Save Banner</button>
                     </form>
@@ -177,31 +200,78 @@
                 </section>
 
                 <section id="panel-packages" class="admin-panel">
-                    <div class="admin-card p-6">
-                        <h2 class="text-2xl font-black">ট্যুর প্যাকেজ</h2>
-                        <p class="text-slate-500 font-bold mb-6">Package image, title, destination, price, date, description সব edit করা যাবে।</p>
-                        <div class="grid grid-cols-1 gap-5">
+                    <div class="space-y-5">
+                        <div class="admin-card p-6">
+                            <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
+                                <div>
+                                    <h2 class="text-2xl font-black">ট্যুর প্যাকেজ ম্যানেজমেন্ট</h2>
+                                    <p class="text-slate-500 font-bold">নতুন package create, existing package update/delete, image/title/price সব এখান থেকে change হবে।</p>
+                                </div>
+                                <div class="px-4 py-2 rounded-xl bg-orange-50 text-[#f05a28] font-black">{{ $tours->count() }} Packages</div>
+                            </div>
+
+                            <form action="{{ route('admin.content.tours.store') }}" method="POST" class="soft-panel p-4 space-y-4">
+                                @csrf
+                                <div class="flex items-center justify-between gap-3">
+                                    <h3 class="font-black text-lg">নতুন প্যাকেজ যোগ করুন</h3>
+                                    <button class="bg-[#f05a28] text-white px-5 py-3 rounded-xl font-black">Create Package</button>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3">
+                                    <label><span class="field-label">Package Name</span><input name="title" required class="admin-input" placeholder="Sylhet Sada Pathor Day Tour"></label>
+                                    <label><span class="field-label">Destination</span><input name="destination" required class="admin-input" placeholder="Bholaganj, Sylhet"></label>
+                                    <label><span class="field-label">Duration</span><input name="duration" class="admin-input" placeholder="1 Day"></label>
+                                    <label><span class="field-label">Price</span><input name="price_per_person" required type="number" min="0" class="admin-input" placeholder="1350"></label>
+                                    <label><span class="field-label">Date</span><input name="date" required class="admin-input" placeholder="2026-07-15"></label>
+                                    <label><span class="field-label">Total Seats</span><input name="total_seats" required type="number" min="1" value="40" class="admin-input"></label>
+                                    <label class="md:col-span-2"><span class="field-label">Image URL</span><input name="image" required type="url" class="admin-input" placeholder="https://images.unsplash.com/..."></label>
+                                    <label class="md:col-span-2 xl:col-span-4"><span class="field-label">Description</span><textarea name="description" rows="3" class="admin-input" placeholder="Package details"></textarea></label>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="admin-card p-0 overflow-hidden">
+                            <div class="hidden xl:grid grid-cols-[72px_1fr_150px_120px_120px_110px_210px] gap-4 px-5 py-4 border-b table-head bg-slate-50">
+                                <span>Image</span>
+                                <span>Package</span>
+                                <span>Destination</span>
+                                <span>Price</span>
+                                <span>Date</span>
+                                <span>Seats</span>
+                                <span>Action</span>
+                            </div>
                             @foreach($tours as $tour)
-                                <form action="{{ route('admin.content.tours.update', $tour) }}" method="POST" class="border border-slate-200 rounded-2xl p-4 grid grid-cols-1 xl:grid-cols-[220px_1fr] gap-5 bg-white">
+                                @php($bookedSeats = $tour->bookings->sum('passenger_count'))
+                                <form id="update-tour-{{ $tour->id }}" action="{{ route('admin.content.tours.update', $tour) }}" method="POST" class="grid grid-cols-1 xl:grid-cols-[72px_1fr_150px_120px_120px_110px_210px] gap-4 p-5 border-b border-slate-100 items-start">
                                     @csrf
-                                    <img src="{{ $tour->image }}" alt="{{ $tour->title }}" class="w-full h-56 xl:h-full object-cover rounded-2xl">
-                                    <div class="space-y-3">
-                                        <input name="title" value="{{ $tour->title }}" required class="admin-input font-black">
-                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                            <input name="destination" value="{{ $tour->destination }}" required class="admin-input" placeholder="Destination">
-                                            <input name="duration" value="{{ $tour->duration }}" class="admin-input" placeholder="Duration">
-                                            <input name="price_per_person" value="{{ $tour->price_per_person }}" required type="number" class="admin-input" placeholder="Price">
-                                            <input name="date" value="{{ $tour->date }}" required class="admin-input" placeholder="Date">
-                                        </div>
-                                        <input name="image" value="{{ $tour->image }}" required class="admin-input" placeholder="Image URL">
-                                        <textarea name="description" rows="3" class="admin-input" placeholder="Description">{{ $tour->description }}</textarea>
-                                        <div class="flex flex-wrap gap-3">
-                                            <input name="total_seats" value="{{ $tour->total_seats }}" required type="number" class="admin-input w-36" placeholder="Seats">
-                                            <button class="bg-[#f05a28] text-white px-6 py-3 rounded-xl font-black">Save Package</button>
-                                        </div>
+                                    <img src="{{ $tour->image }}" alt="{{ $tour->title }}" class="w-16 h-16 object-cover rounded-xl bg-slate-100">
+                                    <div class="space-y-2">
+                                        <label><span class="field-label xl:hidden">Package</span><input name="title" value="{{ $tour->title }}" required class="admin-input font-black"></label>
+                                        <input name="duration" value="{{ $tour->duration }}" class="admin-input" placeholder="Duration">
+                                        <input name="image" value="{{ $tour->image }}" required type="url" class="admin-input text-sm" placeholder="Image URL">
+                                        <textarea name="description" rows="2" class="admin-input text-sm" placeholder="Description">{{ $tour->description }}</textarea>
+                                    </div>
+                                    <label><span class="field-label xl:hidden">Destination</span><input name="destination" value="{{ $tour->destination }}" required class="admin-input"></label>
+                                    <label><span class="field-label xl:hidden">Price</span><input name="price_per_person" value="{{ $tour->price_per_person }}" required type="number" min="0" class="admin-input"></label>
+                                    <label><span class="field-label xl:hidden">Date</span><input name="date" value="{{ $tour->date }}" required class="admin-input"></label>
+                                    <label>
+                                        <span class="field-label xl:hidden">Seats</span>
+                                        <input name="total_seats" value="{{ $tour->total_seats }}" required type="number" min="1" class="admin-input">
+                                        <span class="block text-xs text-slate-400 font-bold mt-2">{{ $bookedSeats }} booked</span>
+                                    </label>
+                                    <div class="flex flex-wrap gap-2">
+                                        <button form="update-tour-{{ $tour->id }}" class="bg-[#f05a28] text-white px-4 py-3 rounded-xl font-black">Update</button>
+                                        <a href="{{ route('tours.show', $tour->id) }}" target="_blank" class="px-4 py-3 rounded-xl bg-blue-50 text-blue-600 font-black">View</a>
+                                        <button type="submit" form="delete-tour-{{ $tour->id }}" onclick="return confirm('Delete this package?')" class="px-4 py-3 rounded-xl bg-red-50 text-red-600 font-black">Delete</button>
                                     </div>
                                 </form>
+                                <form id="delete-tour-{{ $tour->id }}" action="{{ route('admin.content.tours.delete', $tour) }}" method="POST" class="hidden">
+                                    @csrf
+                                    @method('DELETE')
+                                </form>
                             @endforeach
+                            @if($tours->isEmpty())
+                                <div class="p-10 text-center text-slate-400 font-bold">No package found. Add your first package above.</div>
+                            @endif
                         </div>
                     </div>
                 </section>
@@ -271,6 +341,34 @@
 
         document.querySelectorAll('[data-jump]').forEach(button => {
             button.addEventListener('click', () => activatePanel(button.dataset.jump));
+        });
+
+        const heroRows = document.getElementById('heroImageRows');
+        const makeHeroRow = () => {
+            const row = document.createElement('div');
+            row.className = 'soft-panel p-3 grid grid-cols-1 lg:grid-cols-[150px_1fr_auto] gap-3 items-center hero-image-row';
+            row.innerHTML = `
+                <div class="w-full h-24 rounded-xl bg-slate-100 flex items-center justify-center text-slate-400 font-black">Preview</div>
+                <input name="images[]" value="" required class="admin-input" placeholder="https://example.com/banner.jpg">
+                <button type="button" class="remove-hero-image px-4 py-3 rounded-xl bg-red-50 text-red-600 font-black">Delete</button>
+            `;
+            return row;
+        };
+
+        document.getElementById('addHeroImage')?.addEventListener('click', () => {
+            heroRows?.appendChild(makeHeroRow());
+        });
+
+        heroRows?.addEventListener('click', (event) => {
+            if (!event.target.classList.contains('remove-hero-image')) return;
+            const rows = heroRows.querySelectorAll('.hero-image-row');
+            const row = event.target.closest('.hero-image-row');
+            if (rows.length > 1) {
+                row?.remove();
+            } else {
+                row.querySelector('input')?.setAttribute('value', '');
+                row.querySelector('input').value = '';
+            }
         });
     </script>
 </body>

@@ -26,7 +26,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/dashboard/password', [DashboardController::class, 'passwordUpdate'])->name('dashboard.password.update');
     Route::post('/admin/content/hero', [AdminContentController::class, 'updateHero'])->name('admin.content.hero');
     Route::post('/admin/content/sections', [AdminContentController::class, 'updateSections'])->name('admin.content.sections');
+    Route::post('/admin/content/tours', [AdminContentController::class, 'storeTour'])->name('admin.content.tours.store');
     Route::post('/admin/content/tours/{tour}', [AdminContentController::class, 'updateTour'])->name('admin.content.tours.update');
+    Route::delete('/admin/content/tours/{tour}', [AdminContentController::class, 'deleteTour'])->name('admin.content.tours.delete');
     Route::post('/admin/content/destinations', [AdminContentController::class, 'storeDestination'])->name('admin.content.destinations.store');
     Route::post('/admin/content/destinations/{destination}', [AdminContentController::class, 'updateDestination'])->name('admin.content.destinations.update');
     Route::delete('/admin/content/destinations/{destination}', [AdminContentController::class, 'deleteDestination'])->name('admin.content.destinations.delete');

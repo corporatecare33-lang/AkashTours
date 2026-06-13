@@ -21,7 +21,7 @@ class DashboardController extends Controller
 
         if ($user->is_admin) {
             $bookings = Booking::with(['tour', 'user'])->latest()->get();
-            $tours = Tour::latest()->get();
+            $tours = Tour::with('bookings')->latest()->get();
             $destinations = Destination::orderBy('sort_order')->get();
             $paymentMethods = PaymentMethod::orderBy('sort_order')->get();
             $hero = SiteSetting::getValue('hero');

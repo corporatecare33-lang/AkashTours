@@ -32,6 +32,11 @@ class AdminContentController extends Controller
         ]);
 
         $data['images'] = array_values(array_filter($data['images']));
+
+        if (empty($data['images'])) {
+            return back()->withErrors('Please add at least one banner image.');
+        }
+
         SiteSetting::setValue('hero', $data);
 
         return back()->with('success', 'Hero banner updated successfully.');
@@ -59,20 +64,31 @@ class AdminContentController extends Controller
     {
         $this->ensureAdmin();
 
-        $data = $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'destination' => ['required', 'string', 'max:255'],
-            'price_per_person' => ['required', 'numeric', 'min:0'],
-            'date' => ['required', 'string', 'max:100'],
-            'duration' => ['nullable', 'string', 'max:100'],
-            'image' => ['required', 'url'],
-            'description' => ['nullable', 'string'],
-            'total_seats' => ['required', 'integer', 'min:1'],
-        ]);
-
-        $tour->update($data);
+        $tour->update($this->tourData($request));
 
         return back()->with('success', 'Tour package updated successfully.');
+    }
+
+    public function storeTour(Request $request)
+    {
+        $this->ensureAdmin();
+
+        Tour::create($this->tourData($request));
+
+        return back()->with('success', 'Tour package created successfully.');
+    }
+
+    public function deleteTour(Tour $tour)
+    {
+        $this->ensureAdmin();
+
+        if ($tour->bookings()->exists()) {
+            return back()->withErrors('This package has bookings, so it cannot be deleted. You can edit it instead.');
+        }
+
+        $tour->delete();
+
+        return back()->with('success', 'Tour package deleted successfully.');
     }
 
     public function storeDestination(Request $request)
@@ -147,5 +163,19 @@ class AdminContentController extends Controller
             'sort_order' => ['required', 'integer', 'min:0'],
             'is_active' => ['nullable', 'boolean'],
         ]) + ['is_active' => false];
+    }
+
+    private function tourData(Request $request): array
+    {
+        return $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'destination' => ['required', 'string', 'max:255'],
+            'price_per_person' => ['required', 'numeric', 'min:0'],
+            'date' => ['required', 'string', 'max:100'],
+            'duration' => ['nullable', 'string', 'max:100'],
+            'image' => ['required', 'url'],
+            'description' => ['nullable', 'string'],
+            'total_seats' => ['required', 'integer', 'min:1'],
+        ]);
     }
 }
