@@ -61,30 +61,23 @@
     <!-- Section 2: Hero Section -->
     <section id="home" class="relative h-[92vh] flex items-center justify-center overflow-hidden">
         <div class="hero-slider-container">
-            <div class="hero-slide active">
-                <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=2000" class="w-full h-full object-cover" alt="Kedarnath">
-            </div>
-            <div class="hero-slide">
-                <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=2000" class="w-full h-full object-cover" alt="Kashmir">
-            </div>
-            <div class="hero-slide">
-                <img src="https://images.unsplash.com/photo-1582650625119-3a31f8fa2699?q=80&w=2000" class="w-full h-full object-cover" alt="Sylhet">
-            </div>
-            <div class="hero-slide">
-                <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=2000" class="w-full h-full object-cover" alt="Kuakata">
-            </div>
+            @foreach(($hero['images'] ?? []) as $image)
+                <div class="hero-slide {{ $loop->first ? 'active' : '' }}">
+                    <img src="{{ $image }}" class="w-full h-full object-cover" alt="Akash Tours Banner">
+                </div>
+            @endforeach
         </div>
         <div class="absolute inset-0 hero-gradient"></div>
         <div class="relative z-20 text-center px-6 max-w-5xl">
             <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-6 py-2 rounded-full mb-8 border border-white/20">
                 <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
-                <span class="text-white text-xs font-black uppercase tracking-[0.2em] font-en">Bangladesh's Top Rated Agency</span>
+                <span class="text-white text-xs font-black uppercase tracking-[0.2em] font-en">{{ $hero['eyebrow'] ?? "Bangladesh's Top Rated Agency" }}</span>
             </div>
-            <h2 class="text-6xl md:text-8xl font-black text-white mb-8 leading-[1.05] tracking-tighter">ভ্রমণ হোক <span class="text-blue-400">নিরাপদ</span> ও আনন্দময়</h2>
-            <p class="text-xl md:text-2xl text-gray-200 mb-12 font-medium max-w-3xl mx-auto leading-relaxed opacity-90">মাধবপুর থেকে নিয়মিত আকর্ষণীয় সব ট্যুর প্যাকেজ আয়োজন করা হয়। আপনার আস্থার প্রতীক - আকাশ ট্যুরস এন্ড ট্রাভেলস।</p>
+            <h2 class="text-6xl md:text-8xl font-black text-white mb-8 leading-[1.05] tracking-tighter">{{ $hero['title'] ?? 'ভ্রমণ হোক নিরাপদ ও আনন্দময়' }}</h2>
+            <p class="text-xl md:text-2xl text-gray-200 mb-12 font-medium max-w-3xl mx-auto leading-relaxed opacity-90">{{ $hero['description'] ?? '' }}</p>
             <div class="flex flex-wrap justify-center gap-6">
-                <a href="#packages" class="bg-white text-blue-900 px-10 py-5 rounded-3xl font-black text-xl hover:bg-blue-50 transition shadow-2xl">ট্যুর প্যাকেজ দেখুন</a>
-                <a href="{{ route('contact') }}" class="bg-blue-600 text-white px-10 py-5 rounded-3xl font-black text-xl hover:bg-blue-700 transition shadow-2xl shadow-blue-900/40">যোগাযোগ করুন</a>
+                <a href="#packages" class="bg-white text-blue-900 px-10 py-5 rounded-3xl font-black text-xl hover:bg-blue-50 transition shadow-2xl">{{ $hero['primary_button'] ?? 'ট্যুর প্যাকেজ দেখুন' }}</a>
+                <a href="{{ route('contact') }}" class="bg-blue-600 text-white px-10 py-5 rounded-3xl font-black text-xl hover:bg-blue-700 transition shadow-2xl shadow-blue-900/40">{{ $hero['secondary_button'] ?? 'যোগাযোগ করুন' }}</a>
             </div>
         </div>
         <!-- Scroll Indicator -->
@@ -102,11 +95,9 @@
                     <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
                     <select name="destination" class="w-full pl-12 pr-6 py-4 bg-gray-50 border-none rounded-2xl font-bold text-gray-700 outline-none appearance-none cursor-pointer focus:ring-2 focus:ring-blue-600/20">
                         <option value="">সবগুলো গন্তব্য</option>
-                        <option value="কেদারনাথ" {{ request('destination') == 'কেদারনাথ' ? 'selected' : '' }}>কেদারনাথ ও বদ্রীনাথ</option>
-                        <option value="রাজশাহী" {{ request('destination') == 'রাজশাহী' ? 'selected' : '' }}>রাজশাহী ও চাঁপাইনবাবগঞ্জ</option>
-                        <option value="কুমিল্লা" {{ request('destination') == 'কুমিল্লা' ? 'selected' : '' }}>Magic Paradise (কুমিল্লা)</option>
-                        <option value="সিলেট" {{ request('destination') == 'সিলেট' ? 'selected' : '' }}>সাদা পাথর (সিলেট)</option>
-                        <option value="কুয়াকাটা" {{ request('destination') == 'কুয়াকাটা' ? 'selected' : '' }}>কুয়াকাটা সমুদ্র সৈকত</option>
+                        @foreach($destinations as $destination)
+                            <option value="{{ $destination->name }}" {{ request('destination') == $destination->name ? 'selected' : '' }}>{{ $destination->name }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -214,8 +205,8 @@
         <div class="container mx-auto px-6">
             <div class="flex flex-wrap justify-between items-end mb-20 gap-8">
                 <div class="max-w-2xl space-y-4">
-                    <h2 class="text-5xl font-black text-gray-900 tracking-tighter">জনপ্রিয় ট্যুর প্যাকেজ</h2>
-                    <p class="text-gray-500 text-lg">পছন্দের গন্তব্যটি বেছে নিন এবং বুকিং করুন খুব সহজেই।</p>
+                    <h2 class="text-5xl font-black text-gray-900 tracking-tighter">{{ $sections['packages_title'] ?? 'জনপ্রিয় ট্যুর প্যাকেজ' }}</h2>
+                    <p class="text-gray-500 text-lg">{{ $sections['packages_description'] ?? 'পছন্দের গন্তব্যটি বেছে নিন এবং বুকিং করুন খুব সহজেই।' }}</p>
                 </div>
                 <a href="{{ route('home') }}" class="bg-blue-600 text-white px-8 py-3 rounded-2xl font-black hover:bg-blue-700 transition shadow-xl shadow-blue-100 flex items-center">
                     <span>সবগুলো প্যাকেজ দেখুন</span>
@@ -263,45 +254,19 @@
     <!-- Section 6: Popular Destinations -->
     <section id="destinations" class="py-32 container mx-auto px-6">
         <div class="text-center max-w-3xl mx-auto mb-20 space-y-4">
-            <h2 class="text-5xl font-black text-gray-900 tracking-tighter">টপ ট্রাভেল ডেস্টিনেশন</h2>
-            <p class="text-gray-500 text-lg">দেশ-বিদেশের সবচেয়ে সুন্দর জায়গাগুলোতে ঘুরে আসুন।</p>
+            <h2 class="text-5xl font-black text-gray-900 tracking-tighter">{{ $sections['destinations_title'] ?? 'টপ ট্রাভেল ডেস্টিনেশন' }}</h2>
+            <p class="text-gray-500 text-lg">{{ $sections['destinations_description'] ?? 'দেশ-বিদেশের সবচেয়ে সুন্দর জায়গাগুলোতে ঘুরে আসুন।' }}</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 h-[600px]">
-            <div class="md:col-span-2 destination-card">
-                <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=1000" class="w-full h-full object-cover" alt="Destination">
-                <div class="destination-overlay">
-                    <h4 class="text-3xl font-black text-white mb-2">কাশ্মীর</h4>
-                    <p class="text-blue-400 font-bold font-en">10+ Packages Available</p>
+            @foreach($destinations as $destination)
+                <div class="destination-card {{ $destination->layout === 'wide' ? 'md:col-span-2' : '' }} {{ $destination->layout === 'tall' ? 'row-span-2' : '' }}">
+                    <img src="{{ $destination->image }}" class="w-full h-full object-cover" alt="{{ $destination->name }}">
+                    <div class="destination-overlay">
+                        <h4 class="{{ $destination->layout === 'wide' ? 'text-3xl' : 'text-2xl' }} font-black text-white mb-2">{{ $destination->name }}</h4>
+                        <p class="text-blue-400 font-bold">{{ $destination->subtitle }}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="destination-card">
-                <img src="https://images.unsplash.com/photo-1582650625119-3a31f8fa2699?q=80&w=1000" class="w-full h-full object-cover" alt="Destination">
-                <div class="destination-overlay">
-                    <h4 class="text-2xl font-black text-white mb-1">সিলেট</h4>
-                    <p class="text-blue-400 font-bold text-sm">সাদা পাথর ও জাফলং</p>
-                </div>
-            </div>
-            <div class="destination-card row-span-2">
-                <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1000" class="w-full h-full object-cover" alt="Destination">
-                <div class="destination-overlay">
-                    <h4 class="text-2xl font-black text-white mb-1">কক্সবাজার</h4>
-                    <p class="text-blue-400 font-bold text-sm">সমুদ্র সৈকত ভ্রমণ</p>
-                </div>
-            </div>
-            <div class="destination-card">
-                <img src="https://images.unsplash.com/photo-1622116208929-577779d732ff?q=80&w=1000" class="w-full h-full object-cover" alt="Destination">
-                <div class="destination-overlay">
-                    <h4 class="text-2xl font-black text-white mb-1">রাজশাহী</h4>
-                    <p class="text-blue-400 font-bold text-sm">আমের রাজধানী</p>
-                </div>
-            </div>
-            <div class="md:col-span-2 destination-card">
-                <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1000" class="w-full h-full object-cover" alt="Destination">
-                <div class="destination-overlay">
-                    <h4 class="text-3xl font-black text-white mb-2">কেদারনাথ</h4>
-                    <p class="text-blue-400 font-bold">পবিত্র তীর্থযাত্রা</p>
-                </div>
-            </div>
+            @endforeach
         </div>
     </section>
 
@@ -400,32 +365,16 @@
     <section class="py-24 bg-[#F8F9FF]">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16 space-y-2">
-                <h2 class="text-3xl font-black text-gray-900 tracking-tight">পেমেন্ট মাধ্যমসমূহ</h2>
-                <p class="text-gray-500 font-medium">মোবাইল ব্যাংকিং, ব্যাংক ও কার্ড পেমেন্ট গ্রহণযোগ্য</p>
+                <h2 class="text-3xl font-black text-gray-900 tracking-tight">{{ $sections['payments_title'] ?? 'পেমেন্ট মাধ্যমসমূহ' }}</h2>
+                <p class="text-gray-500 font-medium">{{ $sections['payments_description'] ?? 'মোবাইল ব্যাংকিং, ব্যাংক ও কার্ড পেমেন্ট গ্রহণযোগ্য' }}</p>
                 <div class="w-12 h-1 bg-blue-500 mx-auto rounded-full mt-4"></div>
             </div>
             
             <div class="bg-white p-10 lg:p-16 rounded-[50px] shadow-2xl shadow-blue-100/50 border border-gray-100">
                 <div class="payment-grid">
-                    @php
-                        $payment_partners = [
-                            ['name' => 'bKash', 'logo' => 'https://upload.wikimedia.org/wikipedia/en/thumb/8/8c/BKash_logo.svg/1200px-BKash_logo.svg.png'],
-                            ['name' => 'Nagad', 'logo' => 'https://download.logo.wine/logo/Nagad/Nagad-Logo.wine.png'],
-                            ['name' => 'Rocket', 'logo' => 'https://raw.githubusercontent.com/manas-p-mishra/payment-icons/master/icons/rocket.png'],
-                            ['name' => 'Upai', 'logo' => 'https://seeklogo.com/images/U/upai-logo-F2134044A1-seeklogo.com.png'],
-                            ['name' => 'Visa', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png'],
-                            ['name' => 'Mastercard', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/1280px-Mastercard-logo.svg.png'],
-                            ['name' => 'Islami Bank', 'logo' => 'https://www.islamibankbd.com/images/logo.png'],
-                            ['name' => 'City Bank', 'logo' => 'https://www.thecitybank.com/img/citybank-logo.png'],
-                            ['name' => 'DBBL', 'logo' => 'https://www.dutchbanglabank.com/img/dbbl-logo.png'],
-                            ['name' => 'Brac Bank', 'logo' => 'https://www.bracbank.com/assets/images/logo.png'],
-                            ['name' => 'Amex', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo_%282018%29.svg/1200px-American_Express_logo_%282018%29.svg.png'],
-                            ['name' => 'Tap', 'logo' => 'https://www.edigitalbangladesh.com/wp-content/uploads/2021/08/tap-logo.png']
-                        ];
-                    @endphp
-                    @foreach($payment_partners as $partner)
+                    @foreach($paymentPartners as $partner)
                     <div class="h-24 bg-gray-50/50 rounded-2xl border border-gray-100 flex items-center justify-center p-6 hover:bg-white hover:shadow-xl hover:border-blue-100 transition duration-300 group">
-                        <img src="{{ $partner['logo'] }}" class="max-h-12 w-auto grayscale group-hover:grayscale-0 transition duration-300" alt="{{ $partner['name'] }}">
+                        <img src="{{ $partner->logo }}" class="max-h-12 w-auto grayscale group-hover:grayscale-0 transition duration-300" alt="{{ $partner->name }}">
                     </div>
                     @endforeach
                 </div>

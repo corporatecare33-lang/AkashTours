@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Booking;
+use App\Models\Destination;
+use App\Models\PaymentMethod;
+use App\Models\SiteSetting;
 use App\Models\Tour;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +21,11 @@ class DashboardController extends Controller
 
         if ($user->is_admin) {
             $bookings = Booking::with(['tour', 'user'])->latest()->get();
+            $tours = Tour::latest()->get();
+            $destinations = Destination::orderBy('sort_order')->get();
+            $paymentMethods = PaymentMethod::orderBy('sort_order')->get();
+            $hero = SiteSetting::getValue('hero');
+            $sections = SiteSetting::getValue('sections');
             $stats = [
                 'bookings' => Booking::count(),
                 'tours' => Tour::count(),
@@ -25,7 +33,7 @@ class DashboardController extends Controller
                 'revenue' => Booking::sum('total_price'),
             ];
 
-            return view('dashboard', compact('user', 'bookings', 'stats'));
+            return view('admin.dashboard', compact('user', 'bookings', 'stats', 'tours', 'destinations', 'paymentMethods', 'hero', 'sections'));
         }
 
         $bookings = $user->bookings()->with('tour')->latest()->get();

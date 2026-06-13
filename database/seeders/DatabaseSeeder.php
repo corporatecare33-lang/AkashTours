@@ -25,5 +25,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call(TourSeeder::class);
+        $this->call(ContentSeeder::class);
     }
 }

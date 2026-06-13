@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Destination;
+use App\Models\PaymentMethod;
+use App\Models\SiteSetting;
 use App\Models\Tour;
 
 class HomeController extends Controller
@@ -28,8 +31,12 @@ class HomeController extends Controller
         }
 
         $packages = $query->get();
+        $hero = SiteSetting::getValue('hero');
+        $sections = SiteSetting::getValue('sections');
+        $destinations = Destination::where('is_active', true)->orderBy('sort_order')->get();
+        $paymentPartners = PaymentMethod::where('is_active', true)->orderBy('sort_order')->get();
 
-        return view('welcome', compact('packages'));
+        return view('welcome', compact('packages', 'hero', 'sections', 'destinations', 'paymentPartners'));
     }
 
     public function about()
