@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Booking;
+use App\Models\Tour;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
@@ -12,8 +15,23 @@ class DashboardController extends Controller
     public function index()
     {
         $user = Auth::user();
+
+        if ($user->is_admin) {
+            $bookings = Booking::with(['tour', 'user'])->latest()->get();
+            $stats = [
+                'bookings' => Booking::count(),
+                'tours' => Tour::count(),
+                'users' => User::where('is_admin', false)->count(),
+                'revenue' => Booking::sum('total_price'),
+            ];
+
+            return view('dashboard', compact('user', 'bookings', 'stats'));
+        }
+
         $bookings = $user->bookings()->with('tour')->latest()->get();
-        return view('dashboard', compact('user', 'bookings'));
+        $stats = null;
+
+        return view('dashboard', compact('user', 'bookings', 'stats'));
     }
 
     public function profileUpdate(Request $request)

@@ -14,6 +14,9 @@
                     <div>
                         <h1 class="text-4xl font-black tracking-tighter">{{ $user->name }}</h1>
                         <p class="text-blue-100 font-medium opacity-80">{{ $user->email }}</p>
+                        @if($user->is_admin)
+                            <span class="inline-block mt-3 px-4 py-1 bg-white/20 rounded-full text-xs font-black uppercase tracking-widest font-en">Admin</span>
+                        @endif
                     </div>
                 </div>
                 <div class="flex gap-4">
@@ -33,10 +36,28 @@
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 11-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
                     </div>
                     <div>
-                        <h4 class="text-3xl font-black text-gray-900 font-en">{{ $bookings->count() }}</h4>
-                        <p class="text-gray-500 font-bold uppercase text-[10px] tracking-widest">মোট বুকিং</p>
+                        <h4 class="text-3xl font-black text-gray-900 font-en">{{ $stats['bookings'] ?? $bookings->count() }}</h4>
+                        <p class="text-gray-500 font-bold uppercase text-[10px] tracking-widest">{{ $user->is_admin ? 'Total Bookings' : 'মোট বুকিং' }}</p>
                     </div>
                 </div>
+
+                @if($user->is_admin)
+                    <div class="bg-white p-8 rounded-[40px] shadow-sm border border-gray-100 space-y-5">
+                        <h5 class="text-lg font-black text-gray-900 border-b pb-4">Admin Summary</h5>
+                        <div class="flex justify-between font-bold text-gray-600">
+                            <span>Total Tours</span>
+                            <span class="font-en text-blue-600">{{ $stats['tours'] }}</span>
+                        </div>
+                        <div class="flex justify-between font-bold text-gray-600">
+                            <span>Total Users</span>
+                            <span class="font-en text-blue-600">{{ $stats['users'] }}</span>
+                        </div>
+                        <div class="flex justify-between font-bold text-gray-600">
+                            <span>Total Revenue</span>
+                            <span class="font-en text-blue-600">Tk {{ number_format($stats['revenue']) }}</span>
+                        </div>
+                    </div>
+                @endif
                 
                 <div class="bg-white p-10 rounded-[40px] shadow-sm border border-gray-100 space-y-6">
                     <h5 class="text-lg font-black text-gray-900 border-b pb-4">অ্যাকাউন্ট সেটিংস</h5>
@@ -68,7 +89,7 @@
             <div class="lg:col-span-2">
                 <div class="bg-white rounded-[45px] shadow-sm border border-gray-100 overflow-hidden">
                     <div class="p-10 border-b border-gray-50 flex justify-between items-center">
-                        <h3 class="text-2xl font-black text-gray-900 tracking-tighter">আমার বুকিংসমূহ</h3>
+                        <h3 class="text-2xl font-black text-gray-900 tracking-tighter">{{ $user->is_admin ? 'All Bookings' : 'আমার বুকিংসমূহ' }}</h3>
                         <span class="px-4 py-1 bg-blue-50 text-blue-600 rounded-full text-xs font-black uppercase tracking-widest font-en">Recent</span>
                     </div>
                     <div class="overflow-x-auto">
@@ -90,7 +111,12 @@
                                             <img src="{{ $booking->tour->image }}" class="w-12 h-12 rounded-xl object-cover" alt="">
                                             <div>
                                                 <h5 class="font-black text-gray-900 leading-none mb-1">{{ $booking->tour->title }}</h5>
-                                                <p class="text-[10px] text-gray-400 font-bold uppercase font-en">{{ $booking->tour->date }}</p>
+                                                <p class="text-[10px] text-gray-400 font-bold uppercase font-en">
+                                                    {{ $booking->tour->date }}
+                                                    @if($user->is_admin && $booking->user)
+                                                        | {{ $booking->user->name }} ({{ $booking->user->email }})
+                                                    @endif
+                                                </p>
                                             </div>
                                         </div>
                                     </td>

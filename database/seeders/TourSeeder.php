@@ -8,110 +8,100 @@ use Illuminate\Database\Seeder;
 class TourSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Seed real starter tour packages for Akash Tours.
      */
     public function run(): void
     {
+        Tour::query()->delete();
+
         $tours = [
             [
-                'title' => 'পবিত্র কেদারনাথ-বদ্রীনাথ তীর্থযাত্রা ২০২৬',
-                'destination' => 'কেদারনাথ ও বদ্রীনাথ ধাম',
-                'price_per_person' => '65000',
-                'date' => 'সেপ্টেম্বর, ২০২৬',
-                'duration' => '12 দিন 11 রাত',
-                'image' => 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1200',
+                'title' => 'Sylhet Sada Pathor Day Tour',
+                'destination' => 'Bholaganj, Sylhet',
+                'price_per_person' => '1350',
+                'date' => '2026-07-15',
+                'duration' => '1 Day',
+                'image' => 'https://images.unsplash.com/photo-1581600140682-d4e68c8cde32?q=80&w=1200',
                 'gallery' => [
-                    'https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=800',
-                    'https://images.unsplash.com/photo-1621350812353-8328f6453d7d?q=80&w=800'
+                    'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=900',
+                    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=900',
                 ],
-                'description' => 'মাধবপুর থেকে সরাসরি কেদারনাথ ও বদ্রীনাথ ধাম যাত্রা। মাত্র ১০ জনের জন্য তীর্থ ভিসা প্রসেসিং। বয়স: ২০ থেকে ৩০ বছরের মধ্যে।',
-                'features' => ['১০ জনের জন্য ভিসা', 'পবিত্র তীর্থযাত্রা', 'অভিজ্ঞ গাইড'],
+                'description' => 'A comfortable group tour from Madhabpur to Sylhet with Sada Pathor, boat ride, local food, and shrine visit.',
+                'features' => ['AC/Non-AC transport', 'Boat ride included', 'Breakfast and lunch included'],
                 'itinerary' => [
-                    ['day' => '1-2', 'title' => 'ঢাকা টু হরিদ্বার', 'desc' => 'বেনাপোল বর্ডার হয়ে কলকাতা, সেখান থেকে ট্রেনে হরিদ্বার যাত্রা।'],
-                    ['day' => '3-5', 'title' => 'পাহাড়ি যাত্রা', 'desc' => 'হরিদ্বার থেকে হৃষীকেশ হয়ে রুদ্রপ্রয়াগ ও গুপ্তকাশী গমন।'],
-                    ['day' => '6', 'title' => 'কেদারনাথ ধাম', 'desc' => 'পায়ে হেঁটে বা ঘোড়ায় চড়ে কেদারনাথ ধামে আরোহণ ও পূজা।'],
+                    ['day' => '1', 'title' => 'Madhabpur to Sylhet', 'desc' => 'Start early morning, visit Sada Pathor, enjoy boat ride, lunch, and return at night.'],
                 ],
-                'inclusions' => ['ভিসা সহায়তা', 'থাকা ও খাওয়া', 'ট্রেন ও বাস টিকেট'],
-                'exclusions' => ['ব্যক্তিগত কেনাকাটা', 'ঘোড়া বা হেলিকপ্টার খরচ'],
-                'policy' => 'মাধবপুর অফিস থেকে সরাসরি যোগাযোগ করুন।',
-                'total_seats' => 10
+                'inclusions' => ['Transport', 'Breakfast', 'Lunch', 'Boat fare', 'Guide support'],
+                'exclusions' => ['Personal shopping', 'Extra snacks', 'Any ride not listed'],
+                'policy' => 'Booking must be confirmed with advance payment. Cancellation charge applies within 3 days of travel.',
+                'total_seats' => 40,
             ],
             [
-                'title' => 'আমের রাজধানী চাঁপাইনবাবগঞ্জ ও আলোকিত রাজশাহী ভ্রমণ',
-                'destination' => 'রাজশাহী ও চাঁপাইনবাবগঞ্জ',
+                'title' => 'Kuakata Sea Beach Tour',
+                'destination' => 'Kuakata, Patuakhali',
+                'price_per_person' => '4500',
+                'date' => '2026-08-30',
+                'duration' => '3 Nights 2 Days',
+                'image' => 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200',
+                'gallery' => [
+                    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=900',
+                    'https://images.unsplash.com/photo-1519046904884-53103b34b206?q=80&w=900',
+                ],
+                'description' => 'Enjoy sunrise and sunset from the same beach, sea fish, beach activities, and group sightseeing.',
+                'features' => ['Hotel stay', '5 meals', 'Beach sightseeing'],
+                'itinerary' => [
+                    ['day' => '1', 'title' => 'Journey to Kuakata', 'desc' => 'Night journey from Madhabpur/Dhaka route to Kuakata.'],
+                    ['day' => '2', 'title' => 'Beach and Sightseeing', 'desc' => 'Sunrise, beach activities, local market, and sunset point visit.'],
+                    ['day' => '3', 'title' => 'Return Journey', 'desc' => 'Breakfast, checkout, and return journey.'],
+                ],
+                'inclusions' => ['Transport', 'Hotel stay', '5 meals', 'Tour guide'],
+                'exclusions' => ['Personal expense', 'Optional bike/ride cost'],
+                'policy' => 'Seats are limited. Minimum 50% advance is required to confirm booking.',
+                'total_seats' => 40,
+            ],
+            [
+                'title' => 'Rajshahi and Chapainawabganj Mango Tour',
+                'destination' => 'Rajshahi, Chapainawabganj',
                 'price_per_person' => '3500',
-                'date' => '২৫শে জুন, ২০২৬',
-                'duration' => '১ রাত ২ দিন',
+                'date' => '2026-06-25',
+                'duration' => '1 Night 2 Days',
                 'image' => 'https://images.unsplash.com/photo-1622116208929-577779d732ff?q=80&w=1200',
                 'gallery' => [
-                    'https://images.unsplash.com/photo-1582650625119-3a31f8fa2699?q=80&w=800',
-                    'https://images.unsplash.com/photo-1590603740183-980e7f6920eb?q=80&w=800'
+                    'https://images.unsplash.com/photo-1553279768-865429fa0078?q=80&w=900',
+                    'https://images.unsplash.com/photo-1590603740183-980e7f6920eb?q=80&w=900',
                 ],
-                'description' => 'মাধবপুর থেকে প্রিমিয়াম এসি বাসে আরামদায়ক ভ্রমণ। বিশেষ আকর্ষণ: কানসাট আম বাজার, পদ্মা পাড় সূর্যাস্ত, ঐতিহাসিক ছোট সোনা মসজিদ।',
-                'features' => ['কানসাট আম বাজার', '১০ কেজি আম বহন', 'এসি বাস ভ্রমণ'],
+                'description' => 'Visit mango orchards, Kansat mango market, Padma river bank, and historic spots in Rajshahi region.',
+                'features' => ['Mango orchard visit', 'AC bus option', 'Historic sightseeing'],
                 'itinerary' => [
-                    ['day' => '1', 'title' => 'যাত্রা শুরু', 'desc' => 'রাত ১০টায় মাধবপুর থেকে রাজশাহীর উদ্দেশ্যে যাত্রা শুরু।'],
-                    ['day' => '2', 'title' => 'রাজশাহী ও আম বাজার', 'desc' => 'সকালে কানসাট আম বাজার ভ্রমণ। দুপুরে ঐতিহ্যবাহী খাবার। বিকেলে পদ্মা পাড় ও রাজশাহী বিশ্ববিদ্যালয় ক্যাম্পাস।'],
+                    ['day' => '1', 'title' => 'Night Journey', 'desc' => 'Start from Madhabpur at night and travel to Rajshahi.'],
+                    ['day' => '2', 'title' => 'Mango Market and Rajshahi', 'desc' => 'Visit Kansat, mango garden, Padma bank, and return journey.'],
                 ],
-                'inclusions' => ['এসি বাস', '৫ বেলা খাবার', 'সকল এন্ট্রি ফি'],
-                'exclusions' => ['ব্যক্তিগত আম কেনা', 'রাইড ফি'],
-                'policy' => 'যাত্রার ৩ দিন আগে বুকিং নিশ্চিত করুন।',
-                'total_seats' => 40
+                'inclusions' => ['Transport', 'Meals', 'Entry fees', 'Guide support'],
+                'exclusions' => ['Mango purchase', 'Personal cost'],
+                'policy' => 'Booking must be confirmed at least 3 days before the tour date.',
+                'total_seats' => 40,
             ],
             [
-                'title' => 'Magic Paradise Park ডে ট্যুর',
-                'destination' => 'কোটবাড়ি, কুমিল্লা',
+                'title' => 'Magic Paradise Park Family Day Tour',
+                'destination' => 'Kotbari, Cumilla',
                 'price_per_person' => '1650',
-                'date' => '১২-০৬-২০২৬',
-                'duration' => 'ডে ট্যুর',
-                'image' => 'https://images.unsplash.com/photo-1582650625119-3a31f8fa2699?q=80&w=1200',
-                'gallery' => [],
-                'description' => 'মাধবপুর উপজেলা থেকে যাত্রা শুরু। গন্তব্য: Magic Paradise Park, কোটবাড়ি, কুমিল্লা। সকাল ৬:৩০ মিনিটে যাত্রা শুরু।',
-                'features' => ['ভুনা খিচুড়ি ও চিকেন', 'পোলাও + চিকেন রোস্ট', 'ফ্যামিলি ট্যুর'],
-                'itinerary' => [
-                    ['day' => '1', 'title' => 'যাত্রা ও আনন্দ', 'desc' => 'সকালে মাধবপুর থেকে যাত্রা। সারাদিন পার্কে আনন্দ ও রাইড উপভোগ।'],
+                'date' => '2026-07-12',
+                'duration' => '1 Day',
+                'image' => 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200',
+                'gallery' => [
+                    'https://images.unsplash.com/photo-1513889961551-628c1e5e2ee9?q=80&w=900',
+                    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=900',
                 ],
-                'inclusions' => ['যাতায়াত', 'সকাল ও দুপুরের খাবার', 'মিনারেল ওয়াটার'],
-                'exclusions' => ['পার্কের রাইড ফি', 'ব্যক্তিগত খরচ'],
-                'policy' => 'সীমিত সিট - আগে বুকিং দিলে অগ্রাধিকার।',
-                'total_seats' => 45
+                'description' => 'Family-friendly day tour to Magic Paradise Park with transport, food, and group management.',
+                'features' => ['Family friendly', 'Breakfast and lunch', 'Group transport'],
+                'itinerary' => [
+                    ['day' => '1', 'title' => 'Park Day', 'desc' => 'Morning departure, park visit, lunch, free time, and evening return.'],
+                ],
+                'inclusions' => ['Transport', 'Breakfast', 'Lunch', 'Mineral water'],
+                'exclusions' => ['Ride tickets', 'Personal expense'],
+                'policy' => 'Park ride tickets are not included. Children policy depends on park authority rules.',
+                'total_seats' => 45,
             ],
-            [
-                'title' => 'ভোলাগঞ্জ সাদা পাথর ডে ট্যুর',
-                'destination' => 'সিলেট',
-                'price_per_person' => '1350',
-                'date' => '১৫ই মে, ২০২৬',
-                'duration' => 'ডে ট্যুর',
-                'image' => 'https://images.unsplash.com/photo-1581600140682-d4e68c8cde32?q=80&w=1200',
-                'gallery' => [],
-                'description' => 'সাদা পাথরের স্বচ্ছ পানি + নৌকা ভ্রমণ। হযরত শাহজালাল (রঃ) মাজার জিয়ারত। পানসী হোটেলের বিখ্যাত নাস্তা।',
-                'features' => ['নৌকা ভাড়া সহ', 'পানসী হোটেলে নাস্তা', 'মাজার জিয়ারত'],
-                'itinerary' => [
-                    ['day' => '1', 'title' => 'সিলেট যাত্রা', 'desc' => 'ভোর ৬:৩০ মিনিটে মাধবপুর থেকে যাত্রা. সাদা পাথরে জলকেলি ও মাজার জিয়ারত।'],
-                ],
-                'inclusions' => ['নৌকা ভাড়া', 'সকল খাবার', 'যাতায়াত'],
-                'exclusions' => ['ব্যক্তিগত খরচ'],
-                'policy' => 'নিরাপদ ও আনন্দময় ভ্রমণের নিশ্চয়তা।',
-                'total_seats' => 40
-            ],
-            [
-                'title' => 'মাধবপুর টু কুয়াকাটা ট্যুর প্যাকেজ',
-                'destination' => 'কুয়াকাটা সমুদ্র সৈকত',
-                'price_per_person' => '4500',
-                'date' => '৩০ জুন, ২০২৬',
-                'duration' => '৩ রাত ২ দিন',
-                'image' => 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200',
-                'gallery' => [],
-                'description' => 'সূর্যোদয় ও সূর্যাস্ত উপভোগের অনন্য সুযোগ। ৫ বেলা সুস্বাদু খাবার ও নন এসি ট্যুর বাসে যাতায়াত।',
-                'features' => ['সূর্যোদয় ও সূর্যাস্ত', '৫ বেলা খাবার', 'গ্রুপ ভ্রমণ'],
-                'itinerary' => [
-                    ['day' => '1-3', 'title' => 'কুয়াকাটা ভ্রমণ', 'desc' => 'মাধবপুর থেকে যাত্রা শুরু। কুয়াকাটার জনপ্রিয় দর্শনীয় স্থান ভ্রমণ ও সমুদ্র বিলাস।'],
-                ],
-                'inclusions' => ['যাতায়াত', 'থাকা ও খাওয়া', 'গাইড'],
-                'exclusions' => ['ব্যক্তিগত খরচ'],
-                'policy' => 'আসন সীমিত, দ্রুত বুকিং নিশ্চিত করুন।',
-                'total_seats' => 40
-            ]
         ];
 
         foreach ($tours as $tour) {
